@@ -1,0 +1,45 @@
+name: Course checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  infrastructure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate fixture coverage and generated tests
+        run: |
+          python3 tools/check_task.py --audit
+          python3 tools/render_tests.py --check
+          python3 -m unittest discover -s tools/tests -v
+      - name: Build test infrastructure
+        run: |
+          cmake -S . -B build_debug -DCMAKE_BUILD_TYPE=Debug
+          cmake --build build_debug --target test_task_check --parallel 2
+          ctest --test-dir build_debug -R '^infrastructure_' --output-on-failure
+
+  solutions:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install linters
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format clang-tidy
+      - name: Configure
+        run: cmake -S . -B build_debug -DCMAKE_BUILD_TYPE=Debug
+      - name: Check changed student solutions
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: python3 tools/run_changed_tests.py --base "$BASE_SHA" --build build_debug --lint

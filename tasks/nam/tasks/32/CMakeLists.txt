@@ -1,0 +1,1 @@
+add_catch(nam32 test.cpp)

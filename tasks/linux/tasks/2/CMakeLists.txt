@@ -1,0 +1,1 @@
+add_catch(linux2 test.cpp)

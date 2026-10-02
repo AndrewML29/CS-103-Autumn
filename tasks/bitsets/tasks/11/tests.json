@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "kind": "io",
+  "contract": "Ввод: текст до EOF. Вывод: 1 или 0. Слова — непрерывные [A-Za-z]+; регистр не учитывается, кроме варианта 29. Гласные: aeiou; y — согласная. Для «все гласные/согласные различны» нужна хотя бы одна такая буква. Пустые множества соседних слов считаются совпадающими. На пустом тексте варианты 13/14 дают 1, остальные — 0.",
+  "cases": [
+    {
+      "name": "case_1",
+      "input": "",
+      "expected": "0\n"
+    },
+    {
+      "name": "case_2",
+      "input": "123 !?",
+      "expected": "0\n"
+    },
+    {
+      "name": "case_3",
+      "input": "a",
+      "expected": "1\n"
+    },
+    {
+      "name": "case_4",
+      "input": "bbb",
+      "expected": "0\n"
+    },
+    {
+      "name": "case_5",
+      "input": "aaa",
+      "expected": "1\n"
+    },
+    {
+      "name": "case_6",
+      "input": "aeiou",
+      "expected": "1\n"
+    },
+    {
+      "name": "case_7",
+      "input": "bcdfg",
+      "expected": "0\n"
+    },
+    {
+      "name": "case_8",
+      "input": "aei aei",
+      "expected": "1\n"
+    },
+    {
+      "name": "case_9",
+      "input": "abc cba",
+      "expected": "1\n"
+    },
+    {
+      "name": "case_10",
+      "input": "ae ob",
+      "expected": "0\n"
+    },
+    {
+      "name": "case_11",
+      "input": "aaa eee",
+      "expected": "0\n"
+    },
+    {
+      "name": "case_12",
+      "input": "BbB aA",
+      "expected": "0\n"
+    },
+    {
+      "name": "case_13",
+      "input": "Hello, WORLD!",
+      "expected": "1\n"
+    },
+    {
+      "name": "case_14",
+      "input": "rhythm sky",
+      "expected": "0\n"
+    },
+    {
+      "name": "case_15",
+      "input": "ab cd",
+      "expected": "0\n"
+    },
+    {
+      "name": "case_16",
+      "input": "aei,AEI;aei",
+      "expected": "1\n"
+    },
+    {
+      "name": "case_17",
+      "input": "AaB",
+      "expected": "1\n"
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "version": 1,
+  "kind": "shell",
+  "contract": "Каждый *.bash запускается отдельно в новом временном каталоге. Имена входных файлов и ожидаемое состояние заданы setup/checks. Для поиска и ранжирования выводить только имена файлов, для номеров строк — только номера, для пароля — только пароль. Если в исходном условии нет имени файла, используется input.txt (для chmod — run.py). Размеры в MiB. chmod проверяется по точной восьмеричной маске. Учитываются только созданные тестом файлы.",
+  "cases": [
+    {
+      "name": "script_1",
+      "script": "1.bash",
+      "setup": [],
+      "checks": [
+        {
+          "path": "MAI",
+          "type": "directory"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_2",
+      "script": "2.bash",
+      "setup": [
+        {
+          "path": "file1.txt",
+          "type": "file",
+          "content": "alpha\n"
+        },
+        {
+          "path": "file2.txt",
+          "type": "file",
+          "content": "beta\n"
+        }
+      ],
+      "checks": [
+        {
+          "path": "file3.txt",
+          "content": "alpha\nbeta\n"
+        },
+        {
+          "path": "file1.txt",
+          "content": "alpha\n"
+        },
+        {
+          "path": "file2.txt",
+          "content": "beta\n"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_3",
+      "script": "3.bash",
+      "setup": [
+        {
+          "path": "NotEmpty.txt",
+          "type": "file",
+          "content": "alpha\n\nbeta\n\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "expected": "alpha\nbeta\n"
+    },
+    {
+      "name": "script_4",
+      "script": "4.bash",
+      "setup": [
+        {
+          "path": "virus.py",
+          "type": "file",
+          "content": "pass\n",
+          "mode": "777"
+        }
+      ],
+      "checks": [
+        {
+          "path": "virus.py",
+          "mode": "666"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_5",
+      "script": "5.bash",
+      "setup": [],
+      "checks": [
+        {
+          "path": "my_blog.txt",
+          "nonempty": true
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_6",
+      "script": "6.bash",
+      "setup": [
+        {
+          "path": "input.txt",
+          "type": "file",
+          "content": "none\n+79447659120\nhello\n+71234567890\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "expected": "2 4"
+    },
+    {
+      "name": "script_7",
+      "script": "7.bash",
+      "setup": [
+        {
+          "path": "a.txt",
+          "type": "file",
+          "content": "lol\nlol\nlol\nlol\nlol\nlol\nlol\n"
+        },
+        {
+          "path": "b.txt",
+          "type": "file",
+          "content": "lol\nlol\nlol\nlol\nlol\nlol\n"
+        },
+        {
+          "path": "c.txt",
+          "type": "file",
+          "content": "lol\nlol\nlol\nlol\nlol\n"
+        },
+        {
+          "path": "d.txt",
+          "type": "file",
+          "content": "lol\nlol\nlol\nlol\n"
+        },
+        {
+          "path": "e.txt",
+          "type": "file",
+          "content": "lol\nlol\nlol\n"
+        },
+        {
+          "path": "f.txt",
+          "type": "file",
+          "content": "lol\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "expected": "a.txt b.txt c.txt d.txt e.txt"
+    },
+    {
+      "name": "script_8",
+      "script": "8.bash",
+      "setup": [
+        {
+          "path": "a.txt",
+          "type": "file",
+          "content": "fuck\n"
+        },
+        {
+          "path": "nested/b.txt",
+          "type": "file",
+          "content": "ass shit\n"
+        },
+        {
+          "path": "clean.txt",
+          "type": "file",
+          "content": "hello\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "unordered": true,
+      "expected": "a.txt nested/b.txt"
+    },
+    {
+      "name": "script_9",
+      "script": "9.bash",
+      "setup": [
+        {
+          "path": "1.bin",
+          "type": "file",
+          "content": "",
+          "size": 1048576
+        },
+        {
+          "path": "2.bin",
+          "type": "file",
+          "content": "",
+          "size": 2097152
+        },
+        {
+          "path": "3.bin",
+          "type": "file",
+          "content": "",
+          "size": 3145728
+        },
+        {
+          "path": "4.bin",
+          "type": "file",
+          "content": "",
+          "size": 4194304
+        },
+        {
+          "path": "5.bin",
+          "type": "file",
+          "content": "",
+          "size": 5242880
+        },
+        {
+          "path": "6.bin",
+          "type": "file",
+          "content": "",
+          "size": 6291456
+        },
+        {
+          "path": "11.bin",
+          "type": "file",
+          "content": "",
+          "size": 11534336
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "expected": "6.bin 5.bin 4.bin 3.bin 2.bin"
+    },
+    {
+      "name": "script_10",
+      "script": "10.bash",
+      "setup": [
+        {
+          "path": "a.txt",
+          "type": "file",
+          "content": "Trojan\n"
+        },
+        {
+          "path": "nested/b.txt",
+          "type": "file",
+          "content": "Process\n"
+        },
+        {
+          "path": "c.txt",
+          "type": "file",
+          "content": "Backdoor\n"
+        },
+        {
+          "path": "clean.txt",
+          "type": "file",
+          "content": "hello\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "unordered": true,
+      "expected": "a.txt c.txt nested/b.txt"
+    }
+  ]
+}

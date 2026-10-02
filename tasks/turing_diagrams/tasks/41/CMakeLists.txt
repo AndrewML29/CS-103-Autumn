@@ -1,0 +1,1 @@
+add_catch(turing_diagrams41 test.cpp)

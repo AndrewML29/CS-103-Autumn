@@ -1,0 +1,1 @@
+add_catch(turing_machine26 test.cpp)

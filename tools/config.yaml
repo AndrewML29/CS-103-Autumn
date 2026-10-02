@@ -1,0 +1,109 @@
+users_list: ./tools/students.txt
+template_dir: ./tools/templates
+readme_dir: ./tools/readmes
+pics_dir: ./tools/pics
+task_descriptions: {
+  linux: {
+    var_num: 5,
+    readme: linux
+  },
+  latex: {
+    readme: tex
+  },
+  turing_machine: {
+    var_num: 53,
+    data_path: ./tools/data/5.txt,
+    template_solution: {
+      turing_machine.tu: solution.tu
+    },
+    readme: tmac,
+    pics: true
+  },
+  turing_diagrams: {
+    var_num: 48,
+    data_path: ./tools/data/6.txt,
+    readme: tdig,
+    pics: true
+  },
+  nam: {
+    var_num: 42,
+    data_path: ./tools/data/7.txt,
+    template_solution: {
+      nam.nam: solution.nam
+    },
+    readme: nam
+  },
+  geometry: {
+    var_num: 30,
+    template_solution: {
+      geometry.h: solution.h,
+      test_solution.cpp: test.cpp
+    },
+    readme: geom,
+    pics: true
+  },
+  finite_state_machine: {
+    var_num: 43,
+    data_path: ./tools/data/11.txt,
+    template_solution: {
+      fsm.h: fsm.h,
+      fsm.cpp: test.cpp,
+    },
+    readme: fsm,
+    pics: true
+  },
+  integers: {
+    var_num: 33,
+    data_path: ./tools/data/12.txt,
+    template_solution: {
+      integers.h: solution.h,
+      test_solution.cpp: test.cpp
+    },
+    readme: int
+  },
+  bitsets: {
+    var_num: 29,
+    data_path: ./tools/data/13.txt,
+    template_solution: {
+      bitsets.h: solution.h,
+      test_solution.cpp: test.cpp
+    },
+    readme: bitset
+  },
+  linerization: {
+    var_num: 28,
+    template_solution: {
+      linerization.h: solution.h,
+      test_solution.cpp: test.cpp
+    },
+    readme: lin,
+    pics: true
+  },
+  matrix: {
+    var_num: 35,
+    data_path: ./tools/data/15.txt,
+    template_solution: {
+      matrix.h: solution.h,
+      test_solution.cpp: test.cpp
+    },
+    readme: matrix
+  },
+  taylor: {
+    var_num: 28,
+    template_solution: {
+      taylor.h: solution.h,
+      test_solution.cpp: test.cpp
+    },
+    readme: taylor,
+    pics: true
+  },
+  numerical_methods: {
+    var_num: 28,
+    template_solution: {
+      numerical_methods.h: solution.h,
+      test_solution.cpp: test.cpp
+    },
+    readme: num,
+    pics: true
+  },
+}

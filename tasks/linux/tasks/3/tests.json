@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "kind": "shell",
+  "contract": "Каждый *.bash запускается отдельно в новом временном каталоге. Имена входных файлов и ожидаемое состояние заданы setup/checks. Для поиска и ранжирования выводить только имена файлов, для номеров строк — только номера, для пароля — только пароль. Если в исходном условии нет имени файла, используется input.txt (для chmod — run.py). Размеры в MiB. chmod проверяется по точной восьмеричной маске. Учитываются только созданные тестом файлы.",
+  "cases": [
+    {
+      "name": "script_1",
+      "script": "1.bash",
+      "setup": [
+        {
+          "path": "a.txt",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": ".hidden",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "dir",
+          "type": "directory"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "unordered": true,
+      "expected": ".hidden a.txt dir",
+      "ignore_dot_entries": true
+    },
+    {
+      "name": "script_2",
+      "script": "2.bash",
+      "setup": [
+        {
+          "path": "root/Chill/Love",
+          "type": "directory"
+        },
+        {
+          "path": "root/MAI/third_korp/bufet/cat.txt",
+          "type": "file",
+          "content": "meow"
+        }
+      ],
+      "checks": [
+        {
+          "path": "root/Chill/Love/cat.txt",
+          "content": "meow"
+        },
+        {
+          "path": "root/MAI/third_korp/bufet/cat.txt",
+          "absent": true
+        }
+      ],
+      "cwd": "root/MAI/third_korp/bufet"
+    },
+    {
+      "name": "script_3",
+      "script": "3.bash",
+      "setup": [
+        {
+          "path": "Jack.txt",
+          "type": "file",
+          "content": "one\ntwo\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "expected": "one\ntwo\n"
+    },
+    {
+      "name": "script_4",
+      "script": "4.bash",
+      "setup": [
+        {
+          "path": "KPSS.go",
+          "type": "file",
+          "content": "",
+          "mode": "000"
+        }
+      ],
+      "checks": [
+        {
+          "path": "KPSS.go",
+          "mode": "421"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_5",
+      "script": "5.bash",
+      "setup": [
+        {
+          "path": "runMe.sh",
+          "type": "file",
+          "content": "",
+          "mode": "666"
+        }
+      ],
+      "checks": [
+        {
+          "path": "runMe.sh",
+          "mode": "755"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_6",
+      "script": "6.bash",
+      "setup": [
+        {
+          "path": "dir1/evil.py",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "dir1/trash.c",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "dir1/hey.cpp",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "keep.txt",
+          "type": "file",
+          "content": "safe"
+        }
+      ],
+      "checks": [
+        {
+          "path": "dir1",
+          "absent": true
+        },
+        {
+          "path": "keep.txt",
+          "content": "safe"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_7",
+      "script": "7.bash",
+      "setup": [
+        {
+          "path": "КИНО.txt",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "Rammstain_Sonne.mp3",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "КИНО_Кукушка.mp3",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "КИНО_Звезда_ReMiX.mp3",
+          "type": "file",
+          "content": ""
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "expected": "КИНО_Кукушка.mp3"
+    },
+    {
+      "name": "script_8",
+      "script": "8.bash",
+      "setup": [
+        {
+          "path": "run.py",
+          "type": "file",
+          "content": "",
+          "mode": "000"
+        }
+      ],
+      "checks": [
+        {
+          "path": "run.py",
+          "mode": "764"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_9",
+      "script": "9.bash",
+      "setup": [
+        {
+          "path": "a.txt",
+          "type": "file",
+          "content": "int x;"
+        },
+        {
+          "path": "b.txt",
+          "type": "file",
+          "content": "char x;"
+        },
+        {
+          "path": "nested/c.txt",
+          "type": "file",
+          "content": "int y;"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "unordered": true,
+      "expected": "a.txt nested/c.txt"
+    },
+    {
+      "name": "script_10",
+      "script": "10.bash",
+      "setup": [
+        {
+          "path": "personal.txt",
+          "type": "file",
+          "content": "hey.uy@gmail.com\nNiceTask@gmail.com\nx@example.com\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "unordered": true,
+      "expected": "hey.uy@gmail.com NiceTask@gmail.com"
+    }
+  ]
+}

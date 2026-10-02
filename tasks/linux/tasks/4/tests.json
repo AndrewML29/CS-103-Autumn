@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "kind": "shell",
+  "contract": "Каждый *.bash запускается отдельно в новом временном каталоге. Имена входных файлов и ожидаемое состояние заданы setup/checks. Для поиска и ранжирования выводить только имена файлов, для номеров строк — только номера, для пароля — только пароль. Если в исходном условии нет имени файла, используется input.txt (для chmod — run.py). Размеры в MiB. chmod проверяется по точной восьмеричной маске. Учитываются только созданные тестом файлы.",
+  "cases": [
+    {
+      "name": "script_1",
+      "script": "1.bash",
+      "setup": [
+        {
+          "path": "DONT_READ_ME.txt",
+          "type": "file",
+          "content": "one\ntwo\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "expected": "one\ntwo\n"
+    },
+    {
+      "name": "script_2",
+      "script": "2.bash",
+      "setup": [
+        {
+          "path": "Party",
+          "type": "directory"
+        },
+        {
+          "path": "work/Jack_Daniels.cpp",
+          "type": "file",
+          "content": "code"
+        }
+      ],
+      "checks": [
+        {
+          "path": "Party/Jack_Daniels.cpp",
+          "content": "code"
+        },
+        {
+          "path": "work/Jack_Daniels.cpp",
+          "absent": true
+        }
+      ],
+      "cwd": "work"
+    },
+    {
+      "name": "script_3",
+      "script": "3.bash",
+      "setup": [
+        {
+          "path": "russia.sh",
+          "type": "file",
+          "content": "",
+          "mode": "777"
+        }
+      ],
+      "checks": [
+        {
+          "path": "russia.sh",
+          "mode": "000"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_4",
+      "script": "4.bash",
+      "setup": [
+        {
+          "path": "file.txt",
+          "type": "file",
+          "content": "one\n\ntwo\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "expected": "1 one 2 two"
+    },
+    {
+      "name": "script_5",
+      "script": "5.bash",
+      "setup": [
+        {
+          "path": "config.yml",
+          "type": "file",
+          "content": "",
+          "mode": "444"
+        }
+      ],
+      "checks": [
+        {
+          "path": "config.yml",
+          "mode": "664"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_6",
+      "script": "6.bash",
+      "setup": [
+        {
+          "path": "backdoor.py",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "my_trojan.py",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "keylogger.py",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "trojan.txt",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "safe.py",
+          "type": "file",
+          "content": ""
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "unordered": true,
+      "expected": "backdoor.py keylogger.py my_trojan.py"
+    },
+    {
+      "name": "script_7",
+      "script": "7.bash",
+      "setup": [
+        {
+          "path": ".a.txt",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "nested/.b.txt",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "a.txt",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": ".c.md",
+          "type": "file",
+          "content": ""
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "unordered": true,
+      "expected": ".a.txt nested/.b.txt"
+    },
+    {
+      "name": "script_8",
+      "script": "8.bash",
+      "setup": [
+        {
+          "path": "a/empty",
+          "type": "directory"
+        },
+        {
+          "path": "b",
+          "type": "directory"
+        },
+        {
+          "path": "c/nonempty.txt",
+          "type": "file",
+          "content": "x"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "unordered": true,
+      "expected": "a/empty b"
+    },
+    {
+      "name": "script_9",
+      "script": "9.bash",
+      "setup": [],
+      "checks": [],
+      "cwd": ".",
+      "mock_ifconfig": "header\neth0: flags\nline1\nline2\nline3\nline4\nline5\nline6\n",
+      "expected": "line1 line2 line3 line4 line5"
+    },
+    {
+      "name": "script_10",
+      "script": "10.bash",
+      "setup": [
+        {
+          "path": "a.txt",
+          "type": "file",
+          "content": "pizza\npizza\npizza\npizza\npizza\npizza\npizza\n"
+        },
+        {
+          "path": "b.txt",
+          "type": "file",
+          "content": "pizza\npizza\npizza\npizza\npizza\npizza\n"
+        },
+        {
+          "path": "c.txt",
+          "type": "file",
+          "content": "pizza\npizza\npizza\npizza\npizza\n"
+        },
+        {
+          "path": "d.txt",
+          "type": "file",
+          "content": "pizza\npizza\npizza\npizza\n"
+        },
+        {
+          "path": "e.txt",
+          "type": "file",
+          "content": "pizza\npizza\npizza\n"
+        },
+        {
+          "path": "f.txt",
+          "type": "file",
+          "content": "pizza\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "expected": "a.txt b.txt c.txt d.txt e.txt"
+    }
+  ]
+}

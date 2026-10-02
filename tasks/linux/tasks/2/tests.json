@@ -1,0 +1,385 @@
+{
+  "version": 1,
+  "kind": "shell",
+  "contract": "Каждый *.bash запускается отдельно в новом временном каталоге. Имена входных файлов и ожидаемое состояние заданы setup/checks. Для поиска и ранжирования выводить только имена файлов, для номеров строк — только номера, для пароля — только пароль. Если в исходном условии нет имени файла, используется input.txt (для chmod — run.py). Размеры в MiB. chmod проверяется по точной восьмеричной маске. Учитываются только созданные тестом файлы.",
+  "cases": [
+    {
+      "name": "script_1",
+      "script": "1.bash",
+      "setup": [
+        {
+          "path": "a.txt",
+          "type": "file",
+          "content": "a"
+        },
+        {
+          "path": "b.txt",
+          "type": "file",
+          "content": "b"
+        },
+        {
+          "path": "keep.md",
+          "type": "file",
+          "content": "c"
+        }
+      ],
+      "checks": [
+        {
+          "path": "a.md",
+          "content": "a"
+        },
+        {
+          "path": "b.md",
+          "content": "b"
+        },
+        {
+          "path": "a.txt",
+          "absent": true
+        },
+        {
+          "path": "b.txt",
+          "absent": true
+        },
+        {
+          "path": "keep.md",
+          "content": "c"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_2",
+      "script": "2.bash",
+      "setup": [],
+      "checks": [
+        {
+          "path": "a.txt",
+          "type": "file"
+        },
+        {
+          "path": "b.txt",
+          "type": "file"
+        },
+        {
+          "path": "c.txt",
+          "type": "file"
+        },
+        {
+          "path": "d.txt",
+          "type": "file"
+        },
+        {
+          "path": "e.txt",
+          "type": "file"
+        },
+        {
+          "path": "f.txt",
+          "type": "file"
+        },
+        {
+          "path": "g.txt",
+          "type": "file"
+        },
+        {
+          "path": "h.txt",
+          "type": "file"
+        },
+        {
+          "path": "i.txt",
+          "type": "file"
+        },
+        {
+          "path": "j.txt",
+          "type": "file"
+        },
+        {
+          "path": "k.txt",
+          "type": "file"
+        },
+        {
+          "path": "l.txt",
+          "type": "file"
+        },
+        {
+          "path": "m.txt",
+          "type": "file"
+        },
+        {
+          "path": "n.txt",
+          "type": "file"
+        },
+        {
+          "path": "o.txt",
+          "type": "file"
+        },
+        {
+          "path": "p.txt",
+          "type": "file"
+        },
+        {
+          "path": "q.txt",
+          "type": "file"
+        },
+        {
+          "path": "r.txt",
+          "type": "file"
+        },
+        {
+          "path": "s.txt",
+          "type": "file"
+        },
+        {
+          "path": "t.txt",
+          "type": "file"
+        },
+        {
+          "path": "u.txt",
+          "type": "file"
+        },
+        {
+          "path": "v.txt",
+          "type": "file"
+        },
+        {
+          "path": "w.txt",
+          "type": "file"
+        },
+        {
+          "path": "x.txt",
+          "type": "file"
+        },
+        {
+          "path": "y.txt",
+          "type": "file"
+        },
+        {
+          "path": "z.txt",
+          "type": "file"
+        }
+      ],
+      "cwd": "."
+    },
+    {
+      "name": "script_3",
+      "script": "3.bash",
+      "setup": [
+        {
+          "path": "trash.tar",
+          "type": "file",
+          "content": "placeholder"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "manual": "Условие не указывает формат сжатия; нужен выбор gzip/bzip2/xz и имени результата, а также проверка исходного содержимого архива."
+    },
+    {
+      "name": "script_4",
+      "script": "4.bash",
+      "setup": [
+        {
+          "path": "root/chill/home",
+          "type": "directory"
+        },
+        {
+          "path": "root/MAI/Labs/me.txt",
+          "type": "file",
+          "content": "keep"
+        }
+      ],
+      "checks": [
+        {
+          "path": "root/chill/home/me.txt",
+          "content": "keep"
+        },
+        {
+          "path": "root/MAI/Labs/me.txt",
+          "absent": true
+        }
+      ],
+      "cwd": "root/MAI/Labs"
+    },
+    {
+      "name": "script_5",
+      "script": "5.bash",
+      "setup": [
+        {
+          "path": "1.bin",
+          "type": "file",
+          "content": "",
+          "size": 1048576
+        },
+        {
+          "path": "2.bin",
+          "type": "file",
+          "content": "",
+          "size": 2097152
+        },
+        {
+          "path": "3.bin",
+          "type": "file",
+          "content": "",
+          "size": 3145728
+        },
+        {
+          "path": "4.bin",
+          "type": "file",
+          "content": "",
+          "size": 4194304
+        },
+        {
+          "path": "5.bin",
+          "type": "file",
+          "content": "",
+          "size": 5242880
+        },
+        {
+          "path": "6.bin",
+          "type": "file",
+          "content": "",
+          "size": 6291456
+        },
+        {
+          "path": "7.bin",
+          "type": "file",
+          "content": "",
+          "size": 7340032
+        },
+        {
+          "path": "8.bin",
+          "type": "file",
+          "content": "",
+          "size": 8388608
+        },
+        {
+          "path": "101.bin",
+          "type": "file",
+          "content": "",
+          "size": 105906176
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "expected": "8.bin 7.bin 6.bin 5.bin 4.bin 3.bin 2.bin"
+    },
+    {
+      "name": "script_6",
+      "script": "6.bash",
+      "setup": [
+        {
+          "path": "input.txt",
+          "type": "file",
+          "content": "example.com : secret\nvk.com : correct\nnotvk.com : wrong\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "expected": "correct"
+    },
+    {
+      "name": "script_7",
+      "script": "7.bash",
+      "setup": [
+        {
+          "path": "movie.mp4",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "clip.mp4",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "clip_remix.mp4",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "song.mp3",
+          "type": "file",
+          "content": ""
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "unordered": true,
+      "expected": "clip.mp4 movie.mp4"
+    },
+    {
+      "name": "script_8",
+      "script": "8.bash",
+      "setup": [
+        {
+          "path": "input.txt",
+          "type": "file",
+          "content": "abc\ndef hello\nxyz\ndef world\n"
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "expected": "2 4"
+    },
+    {
+      "name": "script_9",
+      "script": "9.bash",
+      "setup": [
+        {
+          "path": "a/b",
+          "type": "directory"
+        },
+        {
+          "path": "c",
+          "type": "directory"
+        },
+        {
+          "path": "regular.txt",
+          "type": "file",
+          "content": ""
+        }
+      ],
+      "checks": [],
+      "cwd": ".",
+      "paths": true,
+      "unordered": true,
+      "expected": ". a a/b c"
+    },
+    {
+      "name": "script_10",
+      "script": "10.bash",
+      "setup": [
+        {
+          "path": "empty.txt",
+          "type": "file",
+          "content": ""
+        },
+        {
+          "path": "keep.txt",
+          "type": "file",
+          "content": "keep"
+        },
+        {
+          "path": "empty_dir",
+          "type": "directory"
+        }
+      ],
+      "checks": [
+        {
+          "path": "empty.txt",
+          "absent": true
+        },
+        {
+          "path": "keep.txt",
+          "content": "keep"
+        },
+        {
+          "path": "empty_dir",
+          "type": "directory"
+        }
+      ],
+      "cwd": "."
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+add_catch(latex1 test.cpp)

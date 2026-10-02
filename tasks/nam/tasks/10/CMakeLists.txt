@@ -1,0 +1,1 @@
+add_catch(nam10 test.cpp)

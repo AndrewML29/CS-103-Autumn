@@ -1,0 +1,1 @@
+add_catch(finite_state_machine36 test.cpp)

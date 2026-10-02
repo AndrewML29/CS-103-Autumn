@@ -1,0 +1,1 @@
+add_catch(nam40 test.cpp)

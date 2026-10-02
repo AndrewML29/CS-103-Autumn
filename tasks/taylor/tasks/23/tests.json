@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "kind": "function",
+  "contract": "Проверяется long double Func(long double x): значение функции из правого столбца рисунка на заданном отрезке. Абсолютная/относительная погрешность 1e-10. Табулирование в Task(), рекуррентное вычисление ряда, число итераций и формат таблицы остаются предметом отдельной проверки на защите.",
+  "cases": [
+    {
+      "name": "case_1",
+      "input": "0",
+      "expected": "0"
+    },
+    {
+      "name": "case_2",
+      "input": "0.0625",
+      "expected": "0.06241880999595735"
+    },
+    {
+      "name": "case_3",
+      "input": "0.125",
+      "expected": "0.12435499454676144"
+    },
+    {
+      "name": "case_4",
+      "input": "0.1875",
+      "expected": "0.18534794999569476"
+    },
+    {
+      "name": "case_5",
+      "input": "0.25",
+      "expected": "0.24497866312686414"
+    },
+    {
+      "name": "case_6",
+      "input": "0.3125",
+      "expected": "0.30288486837497142"
+    },
+    {
+      "name": "case_7",
+      "input": "0.375",
+      "expected": "0.35877067027057225"
+    },
+    {
+      "name": "case_8",
+      "input": "0.4375",
+      "expected": "0.41241044159738732"
+    },
+    {
+      "name": "case_9",
+      "input": "0.5",
+      "expected": "0.46364760900080615"
+    }
+  ],
+  "tolerance": 1e-10,
+  "coverage": "Func values only; Task table and series algorithm require review"
+}
