@@ -5,7 +5,6 @@ import shutil
 import schema
 import yaml
 
-from random import shuffle
 from schema import Schema, SchemaError
 
 from typing import Dict
@@ -319,19 +318,18 @@ class Repository:
         lab = os.path.basename(os.path.dirname(path_to_tasks))
         
         path_to_file = os.path.join(os.path.dirname(path_to_tasks), 'variants.md')
+        max_var = self.number_of_var[lab]
+        if max_var < 1:
+            raise ValueError(f"Number of variants for {lab} must be positive")
         with open(path_to_file, 'w', encoding='utf-8') as file:
-            file.write(u'| **Студент** | **Вариант**|\n')
-            file.write('|-------------|------------|\n')
-            max_var = self.number_of_var[lab]
-            variants = [x for x in range(1, max_var + 1)]
-            shuffle(variants)
-            for i, user in enumerate(self.students):
-                if i == len(variants):
-                    shuffle(variants)
-                file.write(u'| {user} | [{var}](./tasks/{var}) |\n'.format(
-                    user=user,
-                    var=variants[i % max_var]
-                ))
+            file.write('# Распределение вариантов\n\n')
+            file.write('Вариант = ((номер студента − 1) % ' + str(max_var) + ') + 1.\n\n')
+            file.write('| № | Студент | Вариант |\n')
+            file.write('|---:|---------|:-------:|\n')
+            for number, user in enumerate(self.students, start=1):
+                variant = (number - 1) % max_var + 1
+                file.write(f'| {number} | {user} | [{variant}](./tasks/{variant}) |\n')
+
 
 
     def generate_repository(self, args) -> None:
