@@ -1,0 +1,98 @@
+input: '1101*0110='     
+blank: '_'          
+start state: q0     
+
+table:
+  q0: 
+    '1': {write: 'X', R: qX1}
+    '0': {write: 'X', R: qX0}
+  qX1:
+    '1': {write: '1', R: qX1}
+    '0': {write: '0', R: qX1}
+    '*': {write: '*', R: qX1Y}
+  qX1Y:
+    '1': {write: 'Y', R: qX1Y1}
+    '0': {write: 'Y', R: qX1Y0}
+  qX1Y1:
+    '1': {write: '1', R: qX1Y1}
+    '0': {write: '0', R: qX1Y1}
+    '=': {write: '=', R: qX1Y1}
+    '*': {write: '*', R: qX1Y1}
+    '_': {write: '1', L: qb11}
+    'Y': {write: '1', R: qX1Y}
+  qX1Y0:
+    '1': {write: '1', R: qX1Y0}
+    '0': {write: '0', R: qX1Y0}
+    '=': {write: '=', R: qX1Y0}
+    '*': {write: '*', R: qX1Y0}
+    '_': {write: '0', L: qb10}
+    'Y': {write: '0', R: qX1Y}
+  qX0:
+    '1': {write: '1', R: qX0}
+    '0': {write: '0', R: qX0}
+    '*': {write: '*', R: qX0Y}
+  qX0Y:
+    '1': {write: 'Y', R: qX0Y1}
+    '0': {write: 'Y', R: qX0Y0}
+  qX0Y1:
+    '1': {write: '1', R: qX0Y1}
+    '0': {write: '0', R: qX0Y1}
+    '=': {write: '=', R: qX0Y1}
+    '*': {write: '*', R: qX0Y1}
+    '_': {write: '0', L: qb01}
+    'Y': {write: '1', R: qX0Y}
+  qX0Y0:
+    '1': {write: '1', R: qX0Y0}
+    '0': {write: '0', R: qX0Y0}
+    '=': {write: '=', R: qX0Y0}
+    '*': {write: '*', R: qX0Y0}
+    '_': {write: '0', L: qb00}
+    'Y': {write: '0', R: qX0Y}
+  qb11:
+    '1': {write: '1', L: qb11}
+    '0': {write: '0', L: qb11}
+    '=': {write: '=', L: qb11}
+    'Y': {write: 'Y', L: qb11}
+    '*': {write: '*', L: qb11}
+    'X': {write: '1', R: qnXY1}
+  qb10:
+    '1': {write: '1', L: qb10}
+    '0': {write: '0', L: qb10}
+    '=': {write: '=', L: qb10}
+    'Y': {write: 'Y', L: qb10}
+    '*': {write: '*', L: qb10}
+    'X': {write: '1', R: qnXY0}
+  qb01:
+    '1': {write: '1', L: qb01}
+    '0': {write: '0', L: qb01}
+    '=': {write: '=', L: qb01}
+    'Y': {write: 'Y', L: qb01}
+    '*': {write: '*', L: qb01}
+    'X': {write: '0', R: qnXY1}
+  qb00:
+    '1': {write: '1', L: qb00}
+    '0': {write: '0', L: qb00}
+    '=': {write: '=', L: qb00}
+    'Y': {write: 'Y', L: qb00}
+    '*': {write: '*', L: qb00}
+    'X': {write: '0', R: qnXY0}
+  qnXY1:
+    '1': {write: 'X', R: qX1Y1}
+    '0': {write: 'X', R: qX0Y1}
+    '*': {write: '*', R: qF1}
+    'Y': {write: '1', R: qF1}
+  qnXY0:
+    '1': {write: 'X', R: qX1Y0}
+    '0': {write: 'X', R: qX0Y0}
+    '*': {write: '*', R: qF0}
+    'Y': {write: '0', R: qF0}
+  qF1:
+    '1': {write: '1', R: qF1}
+    '0': {write: '0', R: qF1}
+    'Y': {write: '1', R: qF1}
+  qF0:
+    '1': {write: '1', R: qF0}
+    '0': {write: '0', R: qF0}
+    'Y': {write: '0', R: qF0}
+
+
