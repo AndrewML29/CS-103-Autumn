@@ -1,0 +1,118 @@
+name: repeat 0 1
+source code: |+
+  input: '1101*0110='     
+  blank: '_'          
+  start state: q0     
+
+  table:
+    q0: 
+      '1': {write: 'X', R: qX1}
+      '0': {write: 'X', R: qX0}
+    qX1:
+      '1': {write: '1', R: qX1}
+      '0': {write: '0', R: qX1}
+      '*': {write: '*', R: qX1Y}
+    qX1Y:
+      '1': {write: 'Y', R: qX1Y1}
+      '0': {write: 'Y', R: qX1Y0}
+    qX1Y1:
+      '1': {write: '1', R: qX1Y1}
+      '0': {write: '0', R: qX1Y1}
+      '=': {write: '=', R: qX1Y1}
+      '*': {write: '*', R: qX1Y1}
+      '_': {write: '1', L: qback11}
+      'Y': {write: '1', R: qX1Y}
+    qX1Y0:
+      '1': {write: '1', R: qX1Y0}
+      '0': {write: '0', R: qX1Y0}
+      '=': {write: '=', R: qX1Y0}
+      '*': {write: '*', R: qX1Y0}
+      '_': {write: '0', L: qback10}
+      'Y': {write: '0', R: qX1Y}
+    qX0:
+      '1': {write: '1', R: qX0}
+      '0': {write: '0', R: qX0}
+      '*': {write: '*', R: qX0Y}
+    qX0Y:
+      '1': {write: 'Y', R: qX0Y1}
+      '0': {write: 'Y', R: qX0Y0}
+    qX0Y1:
+      '1': {write: '1', R: qX0Y1}
+      '0': {write: '0', R: qX0Y1}
+      '=': {write: '=', R: qX0Y1}
+      '*': {write: '*', R: qX0Y1}
+      '_': {write: '0', L: qback01}
+      'Y': {write: '1', R: qX0Y}
+    qX0Y0:
+      '1': {write: '1', R: qX0Y0}
+      '0': {write: '0', R: qX0Y0}
+      '=': {write: '=', R: qX0Y0}
+      '*': {write: '*', R: qX0Y0}
+      '_': {write: '0', L: qback00}
+      'Y': {write: '0', R: qX0Y}
+    qback11:
+      '1': {write: '1', L: qback11}
+      '0': {write: '0', L: qback11}
+      '=': {write: '=', L: qback11}
+      'Y': {write: 'Y', L: qback11}
+      '*': {write: '*', L: qback11}
+      'X': {write: '1', R: qnXY1}
+    qback10:
+      '1': {write: '1', L: qback10}
+      '0': {write: '0', L: qback10}
+      '=': {write: '=', L: qback10}
+      'Y': {write: 'Y', L: qback10}
+      '*': {write: '*', L: qback10}
+      'X': {write: '1', R: qnXY0}
+    qback01:
+      '1': {write: '1', L: qback01}
+      '0': {write: '0', L: qback01}
+      '=': {write: '=', L: qback01}
+      'Y': {write: 'Y', L: qback01}
+      '*': {write: '*', L: qback01}
+      'X': {write: '0', R: qnXY1}
+    qback00:
+      '1': {write: '1', L: qback00}
+      '0': {write: '0', L: qback00}
+      '=': {write: '=', L: qback00}
+      'Y': {write: 'Y', L: qback00}
+      '*': {write: '*', L: qback00}
+      'X': {write: '0', R: qnXY0}
+    qnXY1:
+      '1': {write: 'X', R: qX1Y1}
+      '0': {write: 'X', R: qX0Y1}
+      '*': {write: '*', R: qFin1}
+      'Y': {write: '1', R: qFin1}
+    qnXY0:
+      '1': {write: 'X', R: qX1Y0}
+      '0': {write: 'X', R: qX0Y0}
+      '*': {write: '*', R: qFin0}
+      'Y': {write: '0', R: qFin0}
+    qFin1:
+      '1': {write: '1', R: qFin1}
+      '0': {write: '0', R: qFin1}
+      'Y': {write: '1', R: qFin1}
+    qFin0:
+      '1': {write: '1', R: qFin0}
+      '0': {write: '0', R: qFin0}
+      'Y': {write: '0', R: qFin0}
+
+
+positions:
+  q0: {x: 390.83, y: 59.5}
+  qX1: {x: 51.78, y: 93.75}
+  qX1Y: {x: 65.3, y: 262.8}
+  qX1Y1: {x: 236.17, y: 179.74}
+  qX1Y0: {x: 71.83, y: 460.3}
+  qX0: {x: 685.66, y: 120.58}
+  qX0Y: {x: 756.97, y: 195.94}
+  qX0Y1: {x: 482.36, y: 198.88}
+  qX0Y0: {x: 702.18, y: 474.14}
+  qback11: {x: 178.43, y: 343.09}
+  qback10: {x: 195.15, y: 417.25}
+  qback01: {x: 490.43, y: 371.37}
+  qback00: {x: 595.62, y: 351.74}
+  qnXY1: {x: 347.32, y: 283.16, fixed: false}
+  qnXY0: {x: 399.86, y: 462.39}
+  qFin1: {x: 412.09, y: 162.78}
+  qFin0: {x: 309.09, y: 388.65}
